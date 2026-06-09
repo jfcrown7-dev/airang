@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+  <!-- SEO -->
+  <title>아이랑 (Airang) — 아이와 함께, AI와 함께</title>
+  <meta name="description" content="부모와 아이가 함께 성장하는 순간을 아름답게 기록하고 공유하는 AI 육아 커뮤니티. 이유식, 수면, 발달, 예방접종까지 AI가 함께 합니다." />
+  <meta name="keywords" content="육아일기, 아이랑, 육아앱, 이유식, 수면교육, 아기성장, AI육아, 육아커뮤니티, airang, parenting app" />
+  <meta name="author" content="아이랑 (Airang)" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://airang.app" />
+
+  <!-- Open Graph (카카오톡, 페이스북 공유) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://airang.app" />
+  <meta property="og:title" content="아이랑 — 아이와 함께, AI와 함께" />
+  <meta property="og:description" content="부모와 아이가 함께 성장하는 순간을 기록하고 공유하는 AI 육아 커뮤니티" />
+  <meta property="og:image" content="https://airang.app/logo.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta property="og:site_name" content="아이랑 (Airang)" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="아이랑 — AI 육아 커뮤니티" />
+  <meta name="twitter:description" content="아이와 함께, AI와 함께 성장하는 육아 플랫폼" />
+  <meta name="twitter:image" content="https://airang.app/logo.png" />
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#FFD93D" />
+  <meta name="mobile-web-app-capable" content="yes" />
+
+  <!-- Apple (iOS PWA) -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="아이랑" />
+  <link rel="apple-touch-icon" href="/logo.png" />
+  <link rel="apple-touch-startup-image" href="/logo.png" />
+
+  <!-- Microsoft Tiles -->
+  <meta name="msapplication-TileImage" content="/logo.png" />
+  <meta name="msapplication-TileColor" content="#FFD93D" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/logo.png" />
+  <link rel="shortcut icon" href="/logo.png" />
+
+  <!-- 폰트 & 아이콘 -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- 토스페이먼츠 SDK -->
+  <script src="https://js.tosspayments.com/v1/payment"></script>
+
+  <!-- 구조화 데이터 (Google 검색) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "아이랑 (Airang)",
+    "url": "https://airang.app",
+    "description": "AI 기반 육아 커뮤니티 — 아이의 성장을 기록하고 같은 개월 수 부모들과 소통하세요",
+    "applicationCategory": "LifestyleApplication",
+    "operatingSystem": "Web, iOS, Android",
+    "offers": [
+      { "@type": "Offer", "name": "무료", "price": "0", "priceCurrency": "KRW" },
+      { "@type": "Offer", "name": "베이직", "price": "4900", "priceCurrency": "KRW" },
+      { "@type": "Offer", "name": "프리미엄", "price": "9900", "priceCurrency": "KRW" }
+    ],
+    "inLanguage": ["ko", "en", "ja"]
+  }
+  </script>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     스플래시 스크린
+══════════════════════════════════════════ -->
+<div class="splash-screen" id="splash">
+  <div class="splash-logo">
+    <img src="logo.png" alt="아이랑 로고" style="width:100%;height:100%;object-fit:contain;border-radius:28px;"
+      onerror="this.style.display='none';this.parentElement.innerHTML='🌱';" />
+  </div>
+  <div class="splash-tagline" style="margin-top:20px;">아이와 함께, AI와 함께 🍼</div>
+  <div class="splash-dots">
+    <span></span><span></span><span></span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     데스크탑 래퍼
+══════════════════════════════════════════ -->
+<div class="desktop-wrapper">
+
+  <!-- 좌측 사이드 패널 (데스크탑 전용) -->
+  <aside class="side-panel">
+    <!-- 아기 요약 카드 -->
+    <div class="side-panel-card">
+      <h4>👶 우리 아이</h4>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+        <div style="font-size:40px;" id="side-baby-ava">🍼</div>
+        <div>
+          <div style="font-size:16px;font-weight:700;color:var(--c-dark);" id="side-baby-name">이름 미등록</div>
+          <div style="font-size:12px;color:var(--c-subtext);margin-top:3px;" id="side-baby-age">출생일을 등록해주세요</div>
+        </div>
+      </div>
+      <div class="side-stat-row">
+        <div class="side-stat-label"><div class="icon" style="background:var(--c-green);">📏</div> 키</div>
+        <div class="side-stat-value" id="side-height">— cm</div>
+      </div>
+      <div class="side-stat-row">
+        <div class="side-stat-label"><div class="icon" style="background:var(--c-blue);">⚖️</div> 몸무게</div>
+        <div class="side-stat-value" id="side-weight">— kg</div>
+      </div>
+      <div class="side-stat-row">
+        <div class="side-stat-label"><div class="icon" style="background:var(--c-pink);">🎯</div> 마일스톤</div>
+        <div class="side-stat-value" id="side-milestones">0 / 12</div>
+      </div>
+    </div>
+
+    <!-- AI 오늘의 팁 -->
+    <div class="side-panel-card">
+      <h4>🤖 오늘의 AI 팁</h4>
+      <div class="side-tip">
+        <div class="side-tip-title">💡 이번 주 포인트</div>
+        <div id="side-ai-tip">아이의 월령 정보를 등록하면 맞춤 육아 팁을 받을 수 있어요!</div>
+      </div>
+    </div>
+
+    <!-- 구독 플랜 -->
+    <div class="side-panel-card">
+      <h4>✨ 내 플랜</h4>
+      <div class="side-plan-badge free" id="side-plan-badge">🆓 무료 플랜</div>
+      <div style="font-size:12px;color:var(--c-subtext);margin-bottom:12px;">
+        이번 달 사진 <strong id="side-upload-count">0</strong> / 100장
+      </div>
+      <div style="background:var(--c-border);border-radius:4px;height:6px;overflow:hidden;margin-bottom:14px;">
+        <div id="side-upload-bar" style="height:100%;background:linear-gradient(90deg,var(--c-accent),var(--c-primary));border-radius:4px;width:0%;transition:width 0.5s;"></div>
+      </div>
+      <button class="side-upgrade-btn" onclick="openModal('subscribeModal')">🚀 프리미엄 업그레이드</button>
+    </div>
+
+    <!-- 빠른 링크 -->
+    <div class="side-panel-card">
+      <h4>🔗 빠른 이동</h4>
+      <div class="side-stat-row" style="cursor:pointer;" onclick="switchTab('growth')">
+        <div class="side-stat-label"><div class="icon" style="background:var(--c-secondary);">📊</div> 성장 기록 보기</div>
+        <div style="color:var(--c-subtext);">›</div>
+      </div>
+      <div class="side-stat-row" style="cursor:pointer;" onclick="openModal('aiModal')">
+        <div class="side-stat-label"><div class="icon" style="background:var(--c-primary);">🤖</div> AI 상담 시작</div>
+        <div style="color:var(--c-subtext);">›</div>
+      </div>
+      <div class="side-stat-row" style="cursor:pointer;" onclick="openModal('settingsModal')">
+        <div class="side-stat-label"><div class="icon" style="background:var(--c-pink);">⚙️</div> 설정</div>
+        <div style="color:var(--c-subtext);">›</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ══════ 메인 앱 컨테이너 ══════ -->
+  <div class="app-container" id="appContainer">
+
+    <!-- ─── 상단 헤더 ─── -->
+    <header class="top-header" id="mainHeader">
+      <div class="header-logo">
+        <div class="header-logo-icon" style="overflow:hidden;padding:0;background:var(--c-primary);">
+          <img src="logo.png" alt="아이랑" style="width:100%;height:100%;object-fit:cover;border-radius:12px;"
+            onerror="this.parentElement.style.background='linear-gradient(135deg,var(--c-primary),var(--c-accent))';this.parentElement.innerHTML='🌱';" />
+        </div>
+        <div class="header-logo-text">아이<span>랑</span></div>
+      </div>
+      <div class="header-actions">
+        <!-- 언어 스위처 -->
+        <div id="langSwitcher" style="display:flex;gap:2px;align-items:center;"></div>
+        <button class="header-btn" id="aiHeaderBtn" onclick="openModal('aiModal')" title="AI 육아 도우미">
+          🤖
+          <span class="notif-badge" id="aiNotifBadge">1</span>
+        </button>
+        <button class="header-btn" onclick="openModal('notifModal')" title="알림">
+          <i class="far fa-bell"></i>
+          <span class="notif-badge" id="notifBadge" style="display:none;">3</span>
+        </button>
+        <button class="header-btn" onclick="openModal('dmModal')" title="메시지">
+          <i class="far fa-paper-plane"></i>
+        </button>
+        <button class="header-btn" onclick="openModal('settingsModal')" title="설정">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- ════════════════════════════════
+         화면 1: 홈 피드
+    ════════════════════════════════ -->
+    <div class="screen active" id="screen-home">
+
+      <!-- 스토리 섹션 -->
+      <section class="stories-section">
+        <div class="stories-track" id="storiesTrack">
+          <!-- JS로 렌더링 -->
+        </div>
+      </section>
+
+      <!-- AI 배너 -->
+      <div class="ai-banner" onclick="openModal('aiModal')">
+        <div class="ai-banner-left">
+          <div class="ai-banner-icon">🤖</div>
+          <div class="ai-banner-info">
+            <h3>AI 육아 도우미에게 물어보세요</h3>
+            <p>Gemini · ChatGPT 연동 | 24시간 육아 상담</p>
+          </div>
+        </div>
+        <div class="ai-banner-arrow">›</div>
+      </div>
+
+      <!-- AI 선택 칩 -->
+      <div class="ai-selector">
+        <div class="ai-chip active" id="chip-gemini" onclick="setAIProvider('gemini',this)">🔵 Gemini</div>
+        <div class="ai-chip" id="chip-gpt" onclick="setAIProvider('gpt',this)">🟢 ChatGPT</div>
+        <div class="ai-chip" style="margin-left:auto;" onclick="openModal('settingsModal')">⚙️ API 키 설정</div>
+      </div>
+
+      <!-- 월령별 탭 -->
+      <div class="community-tabs">
+        <div class="tabs-track" id="communityTabs">
+          <div class="tab-pill active" onclick="filterFeed('전체',this)">전체</div>
+          <div class="tab-pill" onclick="filterFeed('0-6개월',this)">0-6개월</div>
+          <div class="tab-pill" onclick="filterFeed('7-12개월',this)">7-12개월</div>
+          <div class="tab-pill" onclick="filterFeed('13-24개월',this)">13-24개월</div>
+          <div class="tab-pill" onclick="filterFeed('25-36개월',this)">25-36개월</div>
+          <div class="tab-pill" onclick="filterFeed('4-5세',this)">4-5세</div>
+          <div class="tab-pill" onclick="filterFeed('6세이상',this)">6세이상</div>
+        </div>
+      </div>
+
+      <!-- 성장 요약 카드 -->
+      <div class="growth-summary-card" onclick="switchTab('growth')">
+        <div class="growth-card-header">
+          <div class="growth-card-title">우리 아이 성장 기록 📊</div>
+          <span style="font-size:26px;">🌱</span>
+        </div>
+        <div class="growth-stats-grid">
+          <div class="growth-stat">
+            <div class="growth-stat-val" id="home-age">—</div>
+            <div class="growth-stat-lbl">아이 나이</div>
+          </div>
+          <div class="growth-stat">
+            <div class="growth-stat-val" id="home-height">— cm</div>
+            <div class="growth-stat-lbl">키</div>
+          </div>
+          <div class="growth-stat">
+            <div class="growth-stat-val" id="home-weight">— kg</div>
+            <div class="growth-stat-lbl">몸무게</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 피드 -->
+      <section class="feed-section" id="feedSection">
+        <!-- JS로 렌더링 -->
+      </section>
+
+    </div><!-- /screen-home -->
+
+    <!-- ════════════════════════════════
+         화면 2: 탐색
+    ════════════════════════════════ -->
+    <div class="screen" id="screen-explore">
+      <div class="explore-header">
+        <div class="search-bar">
+          <i class="fas fa-search"></i>
+          <input type="text" id="searchInput" placeholder="해시태그, 사용자 검색..." oninput="handleSearch(this.value)" />
+        </div>
+      </div>
+      <div class="hashtag-chips" id="hashtagChips">
+        <div class="hashtag-chip active" onclick="filterByTag('전체',this)">#전체</div>
+        <div class="hashtag-chip" onclick="filterByTag('이유식',this)">#이유식</div>
+        <div class="hashtag-chip" onclick="filterByTag('수면교육',this)">#수면교육</div>
+        <div class="hashtag-chip" onclick="filterByTag('모유수유',this)">#모유수유</div>
+        <div class="hashtag-chip" onclick="filterByTag('첫걸음마',this)">#첫걸음마</div>
+        <div class="hashtag-chip" onclick="filterByTag('아이성장',this)">#아이성장</div>
+        <div class="hashtag-chip" onclick="filterByTag('육아일기',this)">#육아일기</div>
+        <div class="hashtag-chip" onclick="filterByTag('예방접종',this)">#예방접종</div>
+      </div>
+      <div class="explore-grid" id="exploreGrid">
+        <!-- JS로 렌더링 -->
+      </div>
+    </div><!-- /screen-explore -->
+
+    <!-- ════════════════════════════════
+         화면 3: 성장 기록
+    ════════════════════════════════ -->
+    <div class="screen" id="screen-growth">
+
+      <!-- 아기 프로필 헤더 -->
+      <div class="growth-header">
+        <div class="baby-profile-card">
+          <div class="baby-avatar" id="babyAvatarBtn" onclick="openModal('editBabyModal')" title="아기 프로필 수정">
+            <span id="babyAvatarEmoji">🍼</span>
+          </div>
+          <div class="baby-info">
+            <div class="baby-name" id="babyNameDisplay">아기 이름 미등록</div>
+            <div class="baby-age" id="babyAgeDisplay">출생일을 등록해주세요 →</div>
+            <div class="baby-dday" id="babyDday"></div>
+          </div>
+          <button class="edit-baby-btn" onclick="openModal('editBabyModal')">✏️ 수정</button>
+        </div>
+        <div class="growth-quick-stats">
+          <div class="quick-stat">
+            <div class="quick-stat-val" id="qs-age">—</div>
+            <div class="quick-stat-lbl">개월 수</div>
+          </div>
+          <div class="quick-stat">
+            <div class="quick-stat-val" id="qs-height">—</div>
+            <div class="quick-stat-lbl">키 (cm)</div>
+          </div>
+          <div class="quick-stat">
+            <div class="quick-stat-val" id="qs-weight">—</div>
+            <div class="quick-stat-lbl">몸무게(kg)</div>
+          </div>
+          <div class="quick-stat">
+            <div class="quick-stat-val" id="qs-milestone">0/12</div>
+            <div class="quick-stat-lbl">마일스톤</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 성장 서브 탭 -->
+      <div class="growth-sub-tabs">
+        <div class="growth-sub-tab active" onclick="switchGrowthTab('chart',this)">📈 성장곡선</div>
+        <div class="growth-sub-tab" onclick="switchGrowthTab('daily',this)">📝 생활기록</div>
+        <div class="growth-sub-tab" onclick="switchGrowthTab('vaccine',this)">💉 예방접종</div>
+        <div class="growth-sub-tab" onclick="switchGrowthTab('milestone',this)">⭐ 마일스톤</div>
+      </div>
+
+      <!-- 서브탭: 성장 곡선 -->
+      <div class="growth-sub-content active" id="gtab-chart">
+        <!-- 신장 차트 -->
+        <div class="chart-container">
+          <div class="chart-title">
+            <span>📏 신장 성장 곡선</span>
+            <div class="chart-legend">
+              <div class="chart-legend-item"><div class="legend-dot" style="background:#FFD93D;"></div>우리 아이</div>
+              <div class="chart-legend-item"><div class="legend-dot" style="background:#B8D4F0;"></div>50%ile</div>
+            </div>
+          </div>
+          <svg class="growth-chart-svg" id="heightChart" viewBox="0 0 360 180">
+            <!-- JS로 렌더링 -->
+          </svg>
+        </div>
+
+        <!-- 체중 차트 -->
+        <div class="chart-container">
+          <div class="chart-title">
+            <span>⚖️ 체중 성장 곡선</span>
+            <div class="chart-legend">
+              <div class="chart-legend-item"><div class="legend-dot" style="background:#B8E6B8;"></div>우리 아이</div>
+              <div class="chart-legend-item"><div class="legend-dot" style="background:#B8D4F0;"></div>50%ile</div>
+            </div>
+          </div>
+          <svg class="growth-chart-svg" id="weightChart" viewBox="0 0 360 180">
+            <!-- JS로 렌더링 -->
+          </svg>
+        </div>
+
+        <!-- 기록 추가 폼 -->
+        <div class="log-form">
+          <div class="log-form-title">➕ 성장 기록 추가</div>
+          <div class="log-form-grid">
+            <div class="form-group">
+              <label>날짜</label>
+              <input type="date" class="form-input" id="logDate" />
+            </div>
+            <div class="form-group">
+              <label>키 (cm)</label>
+              <input type="number" class="form-input" id="logHeight" placeholder="예: 75.5" step="0.1" />
+            </div>
+            <div class="form-group">
+              <label>몸무게 (kg)</label>
+              <input type="number" class="form-input" id="logWeight" placeholder="예: 9.8" step="0.1" />
+            </div>
+          </div>
+          <button class="log-add-btn" onclick="addGrowthLog()">📊 기록 저장</button>
+        </div>
+
+        <!-- 히스토리 -->
+        <div class="section-title">📋 기록 히스토리</div>
+        <div class="log-history" id="growthLogHistory">
+          <!-- JS로 렌더링 -->
+        </div>
+      </div>
+
+      <!-- 서브탭: 생활 기록 -->
+      <div class="growth-sub-content" id="gtab-daily">
+        <div class="daily-log-tabs">
+          <div class="daily-log-tab active" onclick="switchDailyTab('feed',this)">🍼 수유</div>
+          <div class="daily-log-tab" onclick="switchDailyTab('solid',this)">🥕 이유식</div>
+          <div class="daily-log-tab" onclick="switchDailyTab('sleep',this)">😴 수면</div>
+          <div class="daily-log-tab" onclick="switchDailyTab('poop',this)">🚽 배변</div>
+        </div>
+
+        <!-- 수유 -->
+        <div class="daily-log-content active" id="dtab-feed">
+          <div class="daily-log-form">
+            <div class="log-form-title">🍼 수유 기록</div>
+            <div class="log-form-grid" style="grid-template-columns:1fr 1fr;">
+              <div class="form-group">
+                <label>시간</label>
+                <input type="time" class="form-input" id="feedTime" />
+              </div>
+              <div class="form-group">
+                <label>종류</label>
+                <select class="form-input" id="feedType">
+                  <option>모유</option><option>분유</option><option>혼합</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>양 (ml)</label>
+                <input type="number" class="form-input" id="feedAmount" placeholder="120" />
+              </div>
+              <div class="form-group">
+                <label>수유 시간 (분)</label>
+                <input type="number" class="form-input" id="feedDuration" placeholder="15" />
+              </div>
+            </div>
+            <button class="log-add-btn" onclick="addDailyLog('feed')">저장</button>
+          </div>
+          <div class="timeline-list" id="feedTimeline"></div>
+        </div>
+
+        <!-- 이유식 -->
+        <div class="daily-log-content" id="dtab-solid" style="display:none;">
+          <div class="daily-log-form">
+            <div class="log-form-title">🥕 이유식 기록</div>
+            <div class="log-form-grid" style="grid-template-columns:1fr 1fr;">
+              <div class="form-group">
+                <label>시간</label>
+                <input type="time" class="form-input" id="solidTime" />
+              </div>
+              <div class="form-group">
+                <label>메뉴</label>
+                <input type="text" class="form-input" id="solidMenu" placeholder="당근 퓨레" />
+              </div>
+              <div class="form-group">
+                <label>양 (g)</label>
+                <input type="number" class="form-input" id="solidAmount" placeholder="50" />
+              </div>
+              <div class="form-group">
+                <label>반응</label>
+                <select class="form-input" id="solidReaction">
+                  <option>😋 잘 먹음</option><option>😐 보통</option><option>😒 거부</option>
+                </select>
+              </div>
+            </div>
+            <button class="log-add-btn" onclick="addDailyLog('solid')">저장</button>
+          </div>
+          <div class="timeline-list" id="solidTimeline"></div>
+        </div>
+
+        <!-- 수면 -->
+        <div class="daily-log-content" id="dtab-sleep" style="display:none;">
+          <div class="daily-log-form">
+            <div class="log-form-title">😴 수면 기록</div>
+            <div class="log-form-grid" style="grid-template-columns:1fr 1fr;">
+              <div class="form-group">
+                <label>취침 시간</label>
+                <input type="time" class="form-input" id="sleepStart" />
+              </div>
+              <div class="form-group">
+                <label>기상 시간</label>
+                <input type="time" class="form-input" id="sleepEnd" />
+              </div>
+              <div class="form-group">
+                <label>낮잠 여부</label>
+                <select class="form-input" id="sleepType">
+                  <option>밤잠</option><option>낮잠</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>수면 질</label>
+                <select class="form-input" id="sleepQuality">
+                  <option>😴 숙면</option><option>😐 보통</option><option>😭 뒤척임</option>
+                </select>
+              </div>
+            </div>
+            <button class="log-add-btn" onclick="addDailyLog('sleep')">저장</button>
+          </div>
+          <div class="timeline-list" id="sleepTimeline"></div>
+        </div>
+
+        <!-- 배변 -->
+        <div class="daily-log-content" id="dtab-poop" style="display:none;">
+          <div class="daily-log-form">
+            <div class="log-form-title">🚽 배변 기록</div>
+            <div class="log-form-grid" style="grid-template-columns:1fr 1fr;">
+              <div class="form-group">
+                <label>시간</label>
+                <input type="time" class="form-input" id="poopTime" />
+              </div>
+              <div class="form-group">
+                <label>유형</label>
+                <select class="form-input" id="poopType">
+                  <option>소변</option><option>대변</option>
+                </select>
+              </div>
+              <div class="form-group" id="poopColorGroup">
+                <label>색깔</label>
+                <select class="form-input" id="poopColor">
+                  <option>노란색</option><option>황갈색</option><option>녹색</option><option>기타</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>상태</label>
+                <select class="form-input" id="poopConsistency">
+                  <option>정상</option><option>묽음</option><option>단단함</option>
+                </select>
+              </div>
+            </div>
+            <button class="log-add-btn" onclick="addDailyLog('poop')">저장</button>
+          </div>
+          <div class="timeline-list" id="poopTimeline"></div>
+        </div>
+      </div>
+
+      <!-- 서브탭: 예방접종 -->
+      <div class="growth-sub-content" id="gtab-vaccine">
+        <div style="padding:0 0 12px;font-size:12px;color:var(--c-subtext);">
+          💡 국가 필수 예방접종 일정입니다. 완료한 항목을 체크하세요.
+        </div>
+        <div class="vaccine-list" id="vaccineList">
+          <!-- JS로 렌더링 -->
+        </div>
+      </div>
+
+      <!-- 서브탭: 마일스톤 -->
+      <div class="growth-sub-content" id="gtab-milestone">
+        <div style="padding:0 0 12px;font-size:12px;color:var(--c-subtext);">
+          🌟 아이의 성장 이정표를 체크해보세요!
+        </div>
+        <div class="milestones-list" id="milestoneList">
+          <!-- JS로 렌더링 -->
+        </div>
+      </div>
+
+    </div><!-- /screen-growth -->
+
+    <!-- ════════════════════════════════
+         화면 4: 프로필
+    ════════════════════════════════ -->
+    <div class="screen" id="screen-profile">
+      <div class="profile-header">
+        <div class="profile-top">
+          <div class="profile-avatar" id="profileAvatar" onclick="openModal('settingsModal')">👩</div>
+          <div class="profile-stats">
+            <div class="profile-stat">
+              <div class="profile-stat-val" id="profilePostCount">0</div>
+              <div class="profile-stat-lbl">게시물</div>
+            </div>
+            <div class="profile-stat">
+              <div class="profile-stat-val" id="profileFollowers">128</div>
+              <div class="profile-stat-lbl">팔로워</div>
+            </div>
+            <div class="profile-stat">
+              <div class="profile-stat-val" id="profileFollowing">64</div>
+              <div class="profile-stat-lbl">팔로잉</div>
+            </div>
+          </div>
+        </div>
+        <div class="profile-name" id="profileName">육아맘</div>
+        <div class="profile-bio" id="profileBio">아이랑과 함께 소중한 순간을 기록 중 🌱</div>
+        <div class="profile-badges" id="profileBadges">
+          <span class="profile-badge new">🌱 신규 부모</span>
+        </div>
+        <button class="profile-edit-btn" onclick="openModal('settingsModal')">✏️ 프로필 편집</button>
+      </div>
+
+      <!-- 그리드 탭 -->
+      <div class="profile-grid-tabs">
+        <div class="profile-grid-tab active" onclick="switchProfileTab('posts',this)" title="게시물">
+          <i class="fas fa-th"></i>
+        </div>
+        <div class="profile-grid-tab" onclick="switchProfileTab('saved',this)" title="저장됨">
+          <i class="far fa-bookmark"></i>
+        </div>
+        <div class="profile-grid-tab" onclick="switchProfileTab('tagged',this)" title="태그됨">
+          <i class="far fa-user"></i>
+        </div>
+      </div>
+      <div class="profile-grid" id="profileGrid">
+        <!-- JS로 렌더링 -->
+      </div>
+    </div><!-- /screen-profile -->
+
+    <!-- ─── 하단 네비게이션 ─── -->
+    <nav class="bottom-nav" id="bottomNav">
+      <div class="nav-item active" id="nav-home" onclick="switchTab('home')">
+        <span class="nav-icon">🏠</span>
+        <span class="nav-label">홈</span>
+      </div>
+      <div class="nav-item" id="nav-explore" onclick="switchTab('explore')">
+        <span class="nav-icon">🔍</span>
+        <span class="nav-label">탐색</span>
+      </div>
+      <button class="nav-post-btn" onclick="openModal('uploadModal')" title="게시물 작성">➕</button>
+      <div class="nav-item" id="nav-growth" onclick="switchTab('growth')">
+        <span class="nav-icon">📊</span>
+        <span class="nav-label">성장</span>
+      </div>
+      <div class="nav-item" id="nav-profile" onclick="switchTab('profile')">
+        <span class="nav-icon">👤</span>
+        <span class="nav-label">프로필</span>
+      </div>
+    </nav>
+
+  </div><!-- /app-container -->
+
+</div><!-- /desktop-wrapper -->
+
+<!-- ══════════════════════════════════════════
+     모달들
+══════════════════════════════════════════ -->
+
+<!-- ─── AI 상담 모달 ─── -->
+<div class="modal-overlay" id="aiModal" onclick="handleModalBgClick(event,'aiModal')">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <div class="modal-title">🤖 AI 육아 도우미</div>
+      <button class="modal-close" onclick="closeModal('aiModal')">✕</button>
+    </div>
+    <p style="font-size:12px;color:var(--c-subtext);margin-bottom:12px;">육아에 대한 모든 궁금증을 편하게 물어보세요 💛</p>
+
+    <!-- AI 제공자 선택 -->
+    <div class="ai-provider-toggle">
+      <button class="ai-provider-btn active" id="aiProvBtn-gemini" onclick="selectAIProvider('gemini')">
+        🔵 Google Gemini
+      </button>
+      <button class="ai-provider-btn" id="aiProvBtn-gpt" onclick="selectAIProvider('gpt')">
+        🟢 ChatGPT (GPT-4o)
+      </button>
+    </div>
+    <div class="ai-key-notice" onclick="openModal('settingsModal')">
+      🔑 <span id="aiKeyStatus">API 키를 설정하면 실제 AI 응답을 받을 수 있어요 →</span>
+    </div>
+
+    <!-- 추천 질문 -->
+    <div class="quick-questions">
+      <div class="quick-q" onclick="sendQuickQ(this)">💤 수면 교육은 언제?</div>
+      <div class="quick-q" onclick="sendQuickQ(this)">🥕 이유식 시작 시기</div>
+      <div class="quick-q" onclick="sendQuickQ(this)">💉 이번 달 예방접종</div>
+      <div class="quick-q" onclick="sendQuickQ(this)">😭 울음을 그치질 않아요</div>
+      <div class="quick-q" onclick="sendQuickQ(this)">🧠 발달 체크리스트</div>
+      <div class="quick-q" onclick="sendQuickQ(this)">🦷 이유식 후 구강 관리</div>
+    </div>
+
+    <!-- 채팅 영역 -->
+    <div class="chat-area" id="chatArea">
+      <div class="chat-msg-ai">
+        안녕하세요! 아이랑 AI 육아 도우미예요 🌱<br/><br/>
+        이유식, 수면, 발달, 예방접종 등 무엇이든 편하게 물어보세요 💛<br/><br/>
+        <em style="font-size:11px;opacity:0.7;">설정에서 Gemini 또는 ChatGPT API 키를 등록하면 더 정확한 답변을 받을 수 있어요!</em>
+      </div>
+    </div>
+    <div class="chat-input-row">
+      <input type="text" class="chat-input" id="chatInput" placeholder="육아 고민을 입력하세요..." onkeydown="if(event.key==='Enter')sendAIMessage()" />
+      <button class="chat-send-btn" onclick="sendAIMessage()"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 스토리 뷰어 ─── -->
+<div class="story-viewer" id="storyViewer">
+  <div class="story-progress-bars" id="storyProgressBars"></div>
+  <div class="story-viewer-header">
+    <div class="story-user-info">
+      <div class="story-user-ava" id="storyUserAva">👶</div>
+      <div>
+        <div class="story-user-name" id="storyUserName">스토리</div>
+        <div class="story-user-time" id="storyUserTime">방금 전</div>
+      </div>
+    </div>
+    <button class="story-close-btn" onclick="closeStory()">✕</button>
+  </div>
+  <div class="story-viewer-content" id="storyContent" onclick="nextStory()">
+    <div class="story-frame" id="storyFrame">🌱</div>
+  </div>
+</div>
+
+<!-- ─── 업로드 모달 ─── -->
+<div class="modal-overlay" id="uploadModal" onclick="handleModalBgClick(event,'uploadModal')">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <div class="modal-title">📸 새 게시물</div>
+      <button class="modal-close" onclick="closeModal('uploadModal')">✕</button>
+    </div>
+
+    <!-- 이미지 업로드 영역 -->
+    <div class="upload-preview" id="uploadPreview" onclick="triggerFileInput()">
+      <div class="upload-icon">📷</div>
+      <div class="upload-hint">사진/영상을 선택하세요</div>
+      <div class="upload-count" id="uploadCountLabel">최대 10개 업로드 가능</div>
+    </div>
+    <input type="file" id="fileInput" accept="image/*,video/*" multiple style="display:none;" onchange="handleFileSelect(this)" />
+
+    <!-- 썸네일 스트립 -->
+    <div class="upload-thumbnail-strip" id="uploadThumbnailStrip"></div>
+
+    <!-- 폼 -->
+    <div class="upload-form">
+      <div>
+        <div class="upload-row-label">✍️ 내용</div>
+        <textarea class="upload-textarea" id="uploadCaption" placeholder="아이의 소중한 순간을 기록해보세요... 💛&#10;#해시태그를 추가하면 더 많은 부모들과 소통할 수 있어요!"></textarea>
+      </div>
+
+      <div>
+        <div class="upload-row-label">👶 아기 월령 태그</div>
+        <div class="tabs-track" style="flex-wrap:wrap;width:auto;gap:6px;" id="uploadAgeTag">
+          <div class="tab-pill active" onclick="selectAgeTag(this)">0-6개월</div>
+          <div class="tab-pill" onclick="selectAgeTag(this)">7-12개월</div>
+          <div class="tab-pill" onclick="selectAgeTag(this)">13-24개월</div>
+          <div class="tab-pill" onclick="selectAgeTag(this)">25-36개월</div>
+          <div class="tab-pill" onclick="selectAgeTag(this)">4-5세</div>
+          <div class="tab-pill" onclick="selectAgeTag(this)">6세이상</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="upload-row-label">🔒 공개 범위</div>
+        <div class="privacy-options">
+          <div class="privacy-opt selected" onclick="selectPrivacy(this)" data-value="public">🌍 전체 공개</div>
+          <div class="privacy-opt" onclick="selectPrivacy(this)" data-value="followers">👥 팔로워</div>
+          <div class="privacy-opt" onclick="selectPrivacy(this)" data-value="family">👨‍👩‍👧 가족만</div>
+          <div class="privacy-opt" onclick="selectPrivacy(this)" data-value="private">🔒 나만 보기</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="upload-row-label">📍 위치</div>
+        <input type="text" class="form-input" id="uploadLocation" placeholder="위치 추가 (선택사항)" />
+      </div>
+
+      <button class="upload-submit-btn" onclick="submitPost()">🌱 게시하기</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 구독 플랜 모달 ─── -->
+<div class="modal-overlay-centered" id="subscribeModal" onclick="handleModalBgClick(event,'subscribeModal')">
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <div class="modal-title">✨ 구독 플랜 선택</div>
+      <button class="modal-close" onclick="closeModal('subscribeModal')">✕</button>
+    </div>
+    <p style="font-size:12px;color:var(--c-subtext);margin-bottom:16px;">아이랑의 모든 기능을 경험해보세요 💛</p>
+
+    <div class="plan-cards">
+      <!-- 무료 -->
+      <div class="plan-card free" onclick="selectPlan(this,'free')">
+        <div class="plan-name">🆓 무료 플랜</div>
+        <div class="plan-price">₩0 <span>/ 월</span></div>
+        <div class="plan-features">
+          <div class="plan-feature"><span class="check">✓</span> 월 사진 100장 업로드</div>
+          <div class="plan-feature"><span class="check">✓</span> AI 상담 월 10회</div>
+          <div class="plan-feature"><span class="check">✓</span> 기본 성장 기록</div>
+          <div class="plan-feature"><span class="cross">✗</span> 영상 업로드</div>
+          <div class="plan-feature"><span class="cross">✗</span> 성장 리포트 PDF</div>
+        </div>
+      </div>
+
+      <!-- 베이직 -->
+      <div class="plan-card basic" onclick="selectPlan(this,'basic')">
+        <div class="plan-badge">인기</div>
+        <div class="plan-name">⭐ 베이직 플랜</div>
+        <div class="plan-price">₩4,900 <span>/ 월</span></div>
+        <div class="plan-features">
+          <div class="plan-feature"><span class="check">✓</span> 사진 무제한 업로드</div>
+          <div class="plan-feature"><span class="check">✓</span> 영상 업로드 (월 20개)</div>
+          <div class="plan-feature"><span class="check">✓</span> AI 상담 월 50회</div>
+          <div class="plan-feature"><span class="check">✓</span> 성장 리포트 PDF</div>
+          <div class="plan-feature"><span class="check">✓</span> 가족 계정 5명</div>
+          <div class="plan-feature"><span class="cross">✗</span> 광고 없음</div>
+          <div class="plan-feature"><span class="cross">✗</span> 아기 앨범 제작</div>
+        </div>
+      </div>
+
+      <!-- 프리미엄 -->
+      <div class="plan-card premium" onclick="selectPlan(this,'premium')">
+        <div class="plan-badge">베스트</div>
+        <div class="plan-name">👑 프리미엄 플랜</div>
+        <div class="plan-price">₩9,900 <span>/ 월</span></div>
+        <div class="plan-features">
+          <div class="plan-feature"><span class="check">✓</span> 모든 베이직 기능 포함</div>
+          <div class="plan-feature"><span class="check">✓</span> AI 상담 무제한</div>
+          <div class="plan-feature"><span class="check">✓</span> 영상 무제한 업로드</div>
+          <div class="plan-feature"><span class="check">✓</span> 광고 없음</div>
+          <div class="plan-feature"><span class="check">✓</span> 가족 계정 무제한</div>
+          <div class="plan-feature"><span class="check">✓</span> <strong>아기 앨범 제작 (월 1권)</strong></div>
+          <div class="plan-feature"><span class="check">✓</span> 우선 고객지원</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 결제 수단 선택 -->
+    <div class="pay-method-section" id="payMethodSection" style="display:none;">
+      <div style="font-size:13px;font-weight:700;color:var(--c-dark);margin-bottom:10px;">💳 결제 수단 선택</div>
+      <div class="pay-methods">
+        <div class="pay-method selected" onclick="selectPayMethod(this,'카카오페이')" data-method="카카오페이">
+          <span style="font-size:20px;">💛</span>
+          <span>카카오페이</span>
+        </div>
+        <div class="pay-method" onclick="selectPayMethod(this,'토스페이')" data-method="토스페이">
+          <span style="font-size:20px;">🔵</span>
+          <span>토스페이</span>
+        </div>
+        <div class="pay-method" onclick="selectPayMethod(this,'네이버페이')" data-method="네이버페이">
+          <span style="font-size:20px;">🟢</span>
+          <span>네이버페이</span>
+        </div>
+        <div class="pay-method" onclick="selectPayMethod(this,'신용카드')" data-method="신용카드">
+          <span style="font-size:20px;">💳</span>
+          <span>신용카드</span>
+        </div>
+      </div>
+
+      <!-- 이름/연락처 (결제 필수 정보) -->
+      <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px;">
+        <input type="text" class="form-input" id="payerName" placeholder="이름 (결제자)" />
+        <input type="tel" class="form-input" id="payerPhone" placeholder="휴대폰 번호 (010-0000-0000)" />
+      </div>
+
+      <div style="background:var(--c-soft);border-radius:12px;padding:12px;margin-top:10px;font-size:11px;color:var(--c-subtext);line-height:1.6;">
+        🔒 결제 정보는 토스페이먼츠를 통해 안전하게 처리됩니다<br/>
+        📋 구독은 매월 자동 갱신되며, 언제든지 해지 가능합니다<br/>
+        📞 문의: support@airang.app
+      </div>
+    </div>
+
+    <button class="subscribe-btn" id="subscribeBtnMain" onclick="handleSubscribe()">🚀 선택한 플랜 시작하기</button>
+    <p style="font-size:11px;color:var(--c-subtext);text-align:center;margin-top:10px;">언제든지 해지 가능 · 자동 갱신 · 토스페이먼츠 안전 결제</p>
+  </div>
+</div>
+
+<!-- ─── 아기 프로필 편집 모달 ─── -->
+<div class="modal-overlay-centered" id="editBabyModal" onclick="handleModalBgClick(event,'editBabyModal')">
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <div class="modal-title">👶 아기 프로필</div>
+      <button class="modal-close" onclick="closeModal('editBabyModal')">✕</button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div class="form-group">
+        <label style="font-size:12px;font-weight:700;color:var(--c-subtext);display:block;margin-bottom:6px;">아기 이름</label>
+        <input type="text" class="form-input" id="babyNameInput" placeholder="예: 이민준" />
+      </div>
+      <div class="form-group">
+        <label style="font-size:12px;font-weight:700;color:var(--c-subtext);display:block;margin-bottom:6px;">생년월일</label>
+        <input type="date" class="form-input" id="babyBirthdateInput" />
+      </div>
+      <div class="form-group">
+        <label style="font-size:12px;font-weight:700;color:var(--c-subtext);display:block;margin-bottom:6px;">성별</label>
+        <div style="display:flex;gap:10px;">
+          <div class="privacy-opt selected" onclick="selectGender(this,'boy')" data-gender="boy" style="flex:1;">👦 남아</div>
+          <div class="privacy-opt" onclick="selectGender(this,'girl')" data-gender="girl" style="flex:1;">👧 여아</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label style="font-size:12px;font-weight:700;color:var(--c-subtext);display:block;margin-bottom:6px;">아기 아바타</label>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <div onclick="selectBabyAvatar(this,'👶')" style="font-size:32px;cursor:pointer;padding:8px;border-radius:12px;border:2px solid transparent;transition:all 0.2s;" class="ava-opt">👶</div>
+          <div onclick="selectBabyAvatar(this,'🍼')" style="font-size:32px;cursor:pointer;padding:8px;border-radius:12px;border:2px solid transparent;transition:all 0.2s;" class="ava-opt">🍼</div>
+          <div onclick="selectBabyAvatar(this,'🌱')" style="font-size:32px;cursor:pointer;padding:8px;border-radius:12px;border:2px solid transparent;transition:all 0.2s;" class="ava-opt">🌱</div>
+          <div onclick="selectBabyAvatar(this,'⭐')" style="font-size:32px;cursor:pointer;padding:8px;border-radius:12px;border:2px solid transparent;transition:all 0.2s;" class="ava-opt">⭐</div>
+          <div onclick="selectBabyAvatar(this,'🐣')" style="font-size:32px;cursor:pointer;padding:8px;border-radius:12px;border:2px solid transparent;transition:all 0.2s;" class="ava-opt">🐣</div>
+          <div onclick="selectBabyAvatar(this,'🌸')" style="font-size:32px;cursor:pointer;padding:8px;border-radius:12px;border:2px solid transparent;transition:all 0.2s;" class="ava-opt">🌸</div>
+        </div>
+      </div>
+      <button class="log-add-btn" onclick="saveBabyProfile()">💾 저장하기</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 설정 모달 ─── -->
+<div class="modal-overlay" id="settingsModal" onclick="handleModalBgClick(event,'settingsModal')">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <div class="modal-title">⚙️ 설정</div>
+      <button class="modal-close" onclick="closeModal('settingsModal')">✕</button>
+    </div>
+
+    <!-- 내 계정 -->
+    <div class="settings-section">
+      <div class="settings-section-title">👤 내 계정</div>
+      <div class="settings-item" onclick="openModal('settingsModal')">
+        <div class="settings-item-left">
+          <div class="settings-item-icon" style="background:var(--c-soft);">✏️</div>
+          <div>
+            <div class="settings-item-name">프로필 편집</div>
+            <div class="settings-item-desc">닉네임, 소개글 변경</div>
+          </div>
+        </div>
+        <div class="settings-item-right">›</div>
+      </div>
+      <div style="padding:12px 0;">
+        <div class="upload-row-label">닉네임</div>
+        <input type="text" class="form-input" id="profileNameInput" placeholder="닉네임 입력" style="margin-bottom:8px;" />
+        <div class="upload-row-label">소개글</div>
+        <textarea class="upload-textarea" id="profileBioInput" placeholder="소개글을 입력하세요" style="min-height:60px;"></textarea>
+        <button class="log-add-btn" style="margin-top:10px;" onclick="saveProfile()">저장</button>
+      </div>
+    </div>
+
+    <!-- AI API 키 설정 -->
+    <div class="settings-section">
+      <div class="settings-section-title">🤖 AI 설정</div>
+      <div class="api-key-section">
+        <div class="api-key-label">🔵 Google Gemini API 키</div>
+        <div class="api-key-row">
+          <input type="password" class="api-key-input" id="geminiKeyInput" placeholder="AIza..." />
+          <button class="api-key-save" onclick="saveAPIKey('gemini')">저장</button>
+        </div>
+        <div style="font-size:11px;color:var(--c-subtext);margin-top:6px;">
+          <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color:var(--c-blue-d);">Google AI Studio에서 무료 발급 →</a>
+        </div>
+      </div>
+      <div class="api-key-section" style="margin-top:10px;">
+        <div class="api-key-label">🟢 OpenAI (ChatGPT) API 키</div>
+        <div class="api-key-row">
+          <input type="password" class="api-key-input" id="openaiKeyInput" placeholder="sk-..." />
+          <button class="api-key-save" onclick="saveAPIKey('openai')">저장</button>
+        </div>
+        <div style="font-size:11px;color:var(--c-subtext);margin-top:6px;">
+          <a href="https://platform.openai.com/api-keys" target="_blank" style="color:var(--c-blue-d);">OpenAI Platform에서 발급 →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 프라이버시 -->
+    <div class="settings-section">
+      <div class="settings-section-title">🔒 프라이버시</div>
+      <div class="settings-item">
+        <div class="settings-item-left">
+          <div class="settings-item-icon" style="background:var(--c-blue);">🔒</div>
+          <div>
+            <div class="settings-item-name">비공개 계정</div>
+            <div class="settings-item-desc">팔로워만 게시물 볼 수 있음</div>
+          </div>
+        </div>
+        <div class="toggle-switch" id="privateToggle" onclick="togglePrivate(this)">
+          <div class="toggle-knob"></div>
+        </div>
+      </div>
+      <div class="settings-item">
+        <div class="settings-item-left">
+          <div class="settings-item-icon" style="background:var(--c-green);">👨‍👩‍👧</div>
+          <div>
+            <div class="settings-item-name">가족 그룹 관리</div>
+            <div class="settings-item-desc">배우자, 조부모, 일촌 설정</div>
+          </div>
+        </div>
+        <div class="settings-item-right">›</div>
+      </div>
+    </div>
+
+    <!-- 구독 -->
+    <div class="settings-section">
+      <div class="settings-section-title">💳 구독 및 결제</div>
+      <div class="settings-item" onclick="closeModal('settingsModal');openModal('subscribeModal')">
+        <div class="settings-item-left">
+          <div class="settings-item-icon" style="background:var(--c-primary);">✨</div>
+          <div>
+            <div class="settings-item-name">구독 플랜 변경</div>
+            <div class="settings-item-desc" id="currentPlanDisplay">현재: 무료 플랜</div>
+          </div>
+        </div>
+        <div class="settings-item-right">›</div>
+      </div>
+    </div>
+
+    <!-- 기타 -->
+    <div class="settings-section">
+      <div class="settings-section-title">ℹ️ 앱 정보</div>
+      <div class="settings-item">
+        <div class="settings-item-left">
+          <div class="settings-item-icon" style="background:var(--c-soft);">📱</div>
+          <div>
+            <div class="settings-item-name">아이랑 v2.0</div>
+            <div class="settings-item-desc">아이와 함께, AI와 함께</div>
+          </div>
+        </div>
+      </div>
+      <div class="settings-item" onclick="if(confirm('모든 데이터를 초기화하시겠습니까?'))resetApp()">
+        <div class="settings-item-left">
+          <div class="settings-item-icon" style="background:var(--c-pink);">🗑️</div>
+          <div>
+            <div class="settings-item-name" style="color:#E06B6B;">데이터 초기화</div>
+            <div class="settings-item-desc">모든 기록을 삭제합니다</div>
+          </div>
+        </div>
+        <div class="settings-item-right">›</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 토스트 알림 ─── -->
+<div class="toast" id="toast"></div>
+
+<!-- ─── 업로드 제한 팝업 ─── -->
+<div class="limit-popup" id="limitPopup">
+  📸 이번 달 100장 업로드 한도 초과! <a href="#" onclick="openModal('subscribeModal')" style="color:var(--c-accent);margin-left:6px;">업그레이드 →</a>
+</div>
+
+<script src="i18n.js"></script>
+<script src="app.js"></script>
+<script>
+  // ─── Service Worker 등록 ───
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js')
+        .then(reg => console.log('[SW] Registered:', reg.scope))
+        .catch(err => console.warn('[SW] Registration failed:', err));
+    });
+  }
+
+  // ─── URL 파라미터로 바로 액션 실행 ───
+  window.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const action = params.get('action');
+    if (action === 'upload') setTimeout(() => openModal('uploadModal'), 2500);
+    if (action === 'ai')     setTimeout(() => openModal('aiModal'), 2500);
+    if (action === 'growth') setTimeout(() => switchTab('growth'), 2500);
+
+    // 다국어 초기화
+    applyTranslations();
+    renderLanguageSwitcher();
+  });
+
+  // ─── PWA 설치 배너 ───
+  let deferredPrompt;
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    // 5초 후 설치 배너 표시
+    setTimeout(() => {
+      if (deferredPrompt) showInstallBanner();
+    }, 5000);
+  });
+
+  function showInstallBanner() {
+    const banner = document.createElement('div');
+    banner.id = 'installBanner';
+    banner.style.cssText = `
+      position:fixed;bottom:90px;left:50%;transform:translateX(-50%);
+      background:var(--c-dark);color:white;padding:14px 20px;
+      border-radius:16px;z-index:300;display:flex;align-items:center;
+      gap:12px;box-shadow:0 8px 32px rgba(0,0,0,0.3);
+      max-width:calc(var(--app-w) - 32px);width:calc(100% - 32px);
+      animation:slideUp 0.3s ease;
+    `;
+    banner.innerHTML = `
+      <img src="logo.png" style="width:36px;height:36px;border-radius:8px;" />
+      <div style="flex:1;">
+        <div style="font-size:13px;font-weight:700;">아이랑 앱 설치</div>
+        <div style="font-size:11px;opacity:0.7;">홈 화면에 추가하고 더 빠르게!</div>
+      </div>
+      <button onclick="installApp()" style="background:var(--c-accent);color:var(--c-dark);border:none;padding:8px 14px;border-radius:20px;font-weight:700;font-size:12px;cursor:pointer;">설치</button>
+      <button onclick="document.getElementById('installBanner').remove()" style="background:none;border:none;color:rgba(255,255,255,0.5);font-size:20px;cursor:pointer;">✕</button>
+    `;
+    document.body.appendChild(banner);
+  }
+
+  async function installApp() {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log('PWA install outcome:', outcome);
+    deferredPrompt = null;
+    const banner = document.getElementById('installBanner');
+    if (banner) banner.remove();
+  }
+
+  window.addEventListener('appinstalled', () => {
+    console.log('아이랑 PWA installed!');
+    deferredPrompt = null;
+  });
+</script>
+</body>
+</html>
