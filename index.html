@@ -168,16 +168,17 @@
 
     <!-- ─── 상단 헤더 ─── -->
     <header class="top-header" id="mainHeader">
-      <div class="header-logo">
+      <div class="header-logo" onclick="openModal('followersModal')" style="cursor:pointer;" title="내 이웃 목록">
         <div class="header-logo-icon" style="overflow:hidden;padding:0;background:var(--c-primary);">
           <img src="logo.png" alt="아이랑" style="width:100%;height:100%;object-fit:cover;border-radius:12px;"
             onerror="this.parentElement.style.background='linear-gradient(135deg,var(--c-primary),var(--c-accent))';this.parentElement.innerHTML='🌱';" />
         </div>
-        <div class="header-logo-text">아이<span>랑</span></div>
       </div>
       <div class="header-actions">
-        <!-- 언어 스위처 -->
-        <div id="langSwitcher" style="display:flex;gap:2px;align-items:center;"></div>
+        <!-- 앨범 버튼 -->
+        <button class="header-btn" onclick="openModal('albumModal')" title="월별 성장앨범">
+          🖼️
+        </button>
         <button class="header-btn" id="aiHeaderBtn" onclick="openModal('aiModal')" title="AI 육아 도우미">
           🤖
           <span class="notif-badge" id="aiNotifBadge">1</span>
@@ -187,7 +188,7 @@
           <span class="notif-badge" id="notifBadge" style="display:none;">3</span>
         </button>
         <button class="header-btn" onclick="openModal('dmModal')" title="메시지">
-          <i class="far fa-paper-plane"></i>
+          <i class="fas fa-paper-plane"></i>
         </button>
         <button class="header-btn" onclick="openModal('settingsModal')" title="설정">
           <i class="fas fa-bars"></i>
